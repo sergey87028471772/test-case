@@ -119,46 +119,62 @@ export function Page1() {
     [searchName, selectedType, startDate, filterData]
   );
 
+  const handleClear = useCallback(() => {
+    setSearchName("");
+    setSelectedType("");
+    setStartDate(null);
+    setEndDate(null);
+    setFilteredData(allData.current);
+  }, []);
+
   return (
     <div className="p-4 space-y-4">
-      <div className="flex space-x-4">
+      <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
         <input
           type="text"
           placeholder={t("namePlaceholder")}
           value={searchName}
           onChange={handleNameSearch}
-          className="w-1/3 p-2 border rounded-md"
+          className="w-full sm:w-1/3 p-2 border rounded-md"
         />
 
         <select
           value={selectedType}
           onChange={handleTypeSelect}
-          className="w-1/3 p-2 border rounded-md"
+          className="w-full sm:w-1/3 p-2 border rounded-md"
         >
           <option value="">{t("all")}</option>
           <option value="Image">{t("image")}</option>
           <option value="Video">{t("video")}</option>
         </select>
 
-        <div className="flex space-x-4">
+        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
           <DatePicker
             selected={startDate}
             onChange={handleStartDateChange}
             dateFormat="dd.MM.yyyy"
             locale={t("locale")}
-            className="p-2 border rounded-md"
+            className="w-full sm:w-auto p-2 border rounded-md"
           />
 
-          <span className="text-center mt-2">{t("to")}</span>
+          <span className="text-center pt-2">{t("to")}</span>
 
           <DatePicker
             selected={endDate}
             onChange={handleEndDateChange}
             dateFormat="dd.MM.yyyy"
             locale={t("locale")}
-            className="p-2 border rounded-md"
+            className="w-full sm:w-auto p-2 border rounded-md"
           />
         </div>
+
+        <button
+          onClick={handleClear}
+          className="text-gray-500"
+          style={{ background: "transparent", border: "none" }}
+        >
+          ✖
+        </button>
       </div>
 
       <div className="overflow-hidden">
@@ -185,11 +201,13 @@ function Row({
   item: MockDataItem;
 }) {
   return (
-    <div style={style} className="flex items-center space-x-16 p-2 border-b">
-      <div>{item.name}</div>
-      <div>{item.type}</div>
-      <div>{dayjs(item.createdDate).format("DD.MM.YYYY")}</div>
-      <img src={item.image} alt="icon"></img>
+    <div style={style} className="flex items-center space-x-4 p-2 border-b">
+      <div className="truncate w-1/4">{item.name}</div>
+      <div className="w-1/4">{item.type}</div>
+      <div className="w-1/4">
+        {dayjs(item.createdDate).format("DD.MM.YYYY")}
+      </div>
+      <img src={item.image} alt="icon" className="w-10 h-10" />
     </div>
   );
 }
