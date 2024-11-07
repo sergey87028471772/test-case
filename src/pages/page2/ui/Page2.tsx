@@ -97,12 +97,23 @@ export function Page2() {
     [controller]
   );
 
-  const handleSelectResult = useCallback((result: IGeoSearchResult) => {
-    setSearchQuery("");
-    setSearchResults([]);
-    setAddress(result.display_name);
-    setPosition(new LatLng(result.lat, result.lon));
-  }, []);
+  const handleSelectResult = useCallback(
+    (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+      const resultData = e.currentTarget.getAttribute("data-result");
+
+      if (resultData) {
+        const result: IGeoSearchResult = JSON.parse(resultData);
+
+        setSearchQuery("");
+        setSearchResults([]);
+        setAddress(result.display_name);
+        setPosition(new LatLng(result.lat, result.lon));
+      } else {
+        console.warn("Data result is missing!");
+      }
+    },
+    []
+  );
 
   return (
     <div>
@@ -120,7 +131,12 @@ export function Page2() {
           {searchResults.map((result, index) => (
             <li
               key={index}
-              onClick={handleSelectResult.bind(null, result)}
+              data-result={JSON.stringify({
+                display_name: result.display_name,
+                lat: result.lat,
+                lon: result.lon,
+              })}
+              onClick={handleSelectResult}
               style={{
                 padding: "10px",
                 cursor: "pointer",
