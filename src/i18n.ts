@@ -14,6 +14,7 @@ i18n.use(initReactI18next).init({
         video: "Video",
         locale: "en",
         to: "to",
+        addressPlaceholder: "Enter address",
       },
     },
     ru: {
@@ -27,6 +28,7 @@ i18n.use(initReactI18next).init({
         video: "Видео",
         locale: "ru",
         to: "по",
+        addressPlaceholder: "Введите адрес",
       },
     },
     kz: {
@@ -40,6 +42,7 @@ i18n.use(initReactI18next).init({
         video: "Бейне",
         to: "дейін",
         locale: "kz",
+        addressPlaceholder: "Мекенжайды енгізіңіз",
       },
     },
   },
