@@ -15,6 +15,7 @@ i18n.use(initReactI18next).init({
         locale: "en",
         to: "to",
         addressPlaceholder: "Enter address",
+        generateButton: "Generate a new card",
       },
     },
     ru: {
@@ -29,6 +30,7 @@ i18n.use(initReactI18next).init({
         locale: "ru",
         to: "по",
         addressPlaceholder: "Введите адрес",
+        generateButton: "Сгенерировать новую карточку",
       },
     },
     kz: {
@@ -43,6 +45,7 @@ i18n.use(initReactI18next).init({
         to: "дейін",
         locale: "kz",
         addressPlaceholder: "Мекенжайды енгізіңіз",
+        generateButton: "Жаңа карточка жасау",
       },
     },
   },

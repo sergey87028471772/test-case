@@ -1,0 +1,1 @@
+export { generateBingoCard } from "./bingoCardData";
